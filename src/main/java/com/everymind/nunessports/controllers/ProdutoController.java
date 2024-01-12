@@ -3,25 +3,32 @@ package com.everymind.nunessports.controllers;
 import com.everymind.nunessports.entities.Produto;
 import com.everymind.nunessports.services.ProdutoService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("api/v1/produtos")
+@RequestMapping("api/v1")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
 
-    @PostMapping
-    public Produto create(@RequestBody Produto produto) {
-        return produtoService.salvarProduto(produto);
+    @PostMapping("/produtos")
+    public String create(@ModelAttribute("produto") Produto produto) {
+        produtoService.salvarProduto(produto);
+        return "redirect:/api/v1/produtos";
     }
 
-    @GetMapping
-    public List<Produto> buscarTodos() {
-        return produtoService.buscarTodos();
+    @GetMapping("/produtos")
+    public ModelAndView produtos() {
+        ModelAndView mv = new ModelAndView("produtos");
+        mv.addObject("produtos", produtoService.buscarTodos());
+        mv.addObject("produto", new Produto());
+        return mv;
     }
 
     @GetMapping("/{id}")
