@@ -23,7 +23,7 @@ public class ProdutoService {
             return produtoRepository.save(produto);
         } catch (DataIntegrityViolationException e) {
             // Adicione tratamento específico para a violação de integridade (por exemplo, produto já existente)
-            throw new RuntimeException("Erro ao salvar o produto. Produto já existe.", e);
+            throw new RuntimeException("Erro ao salvar o produto.", e);
         } catch (Exception e) {
             // Trate outras exceções genéricas
             throw new RuntimeException("Erro ao salvar o produto", e);

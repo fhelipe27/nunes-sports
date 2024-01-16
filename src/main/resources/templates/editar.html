@@ -24,7 +24,7 @@
 <form class="formProduto" method="POST" action="/api/v1/produtos" th:object="${produto}">
 
     <!-- ID -->
-    <input type="hidden" th:value="${produto.id}" name="id"/>
+    <input type="hidden" th:value="${produto.id}" name="id" />
 
     <!-- Campo Nome -->
     <label for="nome">Nome do Produto:</label>
@@ -38,7 +38,8 @@
 
     <!-- Campo Descrição -->
     <label for="descricao">Descrição:</label>
-    <textarea id="descricao" name="descricao" th:value="${produto.descricao}" placeholder="Descreva o produto"
+
+    <textarea id="descricao" name="descricao" th:text="${produto.descricao}" placeholder="Descreva o produto"
               required></textarea>
     <br>
 
@@ -50,45 +51,6 @@
     <!-- Botão de Envio -->
     <input type="submit" value="Cadastrar Produto">
 </form>
-
-<hr>
-
-<!-- Lista de Produtos -->
-<h2 class="centro">Lista de Produtos</h2>
-<table class="table table-striped table-bordered text-center">
-    <thead class="table-dark">
-    <tr>
-        <th scope="col">Código do Produto</th>
-        <th scope="col">Nome do Produto</th>
-        <th scope="col">Descrição</th>
-        <th scope="col">Preço</th>
-        <th scope="col">Editar</th>
-        <th scope="col">Deletar</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="produto : ${produtos}">
-
-
-            <td class="align-middle"><span th:text="${produto.codigo}"></span></td>
-            <td class="align-middle"><span th:text="${produto.nome}"></span></td>
-            <td class="align-middle"><span th:text="${produto.descricao}"></span></td>
-            <td class="align-middle">R$ <span th:text="${produto.preco}"></span></td>
-            <td class="align-middle">
-                <a th:href="@{'/api/v1/editar/' + ${produto.id}}">
-                    <button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
-                </a>
-            </td>
-            <td class="align-middle">
-                <a th:href="@{'/api/v1/deletar/' + ${produto.id}}"
-                   onclick="return confirm('Tem certeza que deseja excluir este produto?')">
-                    <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                </a>
-            </td>
-
-    </tr>
-    </tbody>
-</table>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
