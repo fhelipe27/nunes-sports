@@ -21,10 +21,11 @@
 </nav>
 
 <!-- Formulário para adicionar produtos -->
+
 <form class="formProduto" method="POST" action="/api/v1/produtos" th:object="${produto}">
 
     <!-- ID -->
-    <input type="hidden" th:value="${produto.id}" name="id" />
+    <input type="hidden" th:value="${produto.id}" name="id"/>
 
     <!-- Campo Nome -->
     <label for="nome">Nome do Produto:</label>
@@ -38,7 +39,6 @@
 
     <!-- Campo Descrição -->
     <label for="descricao">Descrição:</label>
-
     <textarea id="descricao" name="descricao" th:text="${produto.descricao}" placeholder="Descreva o produto"
               required></textarea>
     <br>
